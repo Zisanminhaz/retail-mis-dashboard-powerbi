@@ -1,0 +1,56 @@
+{
+  "name": "Retail MIS - Black Red",
+  "dataColors": ["#E53935", "#9E9E9E", "#FF8A80", "#B71C1C", "#F5F5F5", "#616161", "#FFCDD2", "#424242"],
+  "background": "#1C1C1C",
+  "foreground": "#F5F5F5",
+  "tableAccent": "#E53935",
+  "good": "#43A047",
+  "neutral": "#FFB300",
+  "bad": "#E53935",
+  "maximum": "#E53935",
+  "center": "#7A1F1F",
+  "minimum": "#2B2B2B",
+  "textClasses": {
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 24, "color": "#FFFFFF" },
+    "title": { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#F5F5F5" },
+    "header": { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#F5F5F5" },
+    "label": { "fontFace": "Segoe UI", "fontSize": 10, "color": "#BDBDBD" }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#111111" } }, "transparency": 0 }],
+        "outspace": [{ "color": { "solid": { "color": "#111111" } }, "transparency": 0 }]
+      }
+    },
+    "*": {
+      "*": {
+        "background": [{ "show": true, "color": { "solid": { "color": "#1C1C1C" } }, "transparency": 0 }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#2E2E2E" } }, "radius": 8 }],
+        "title": [{ "show": true, "fontColor": { "solid": { "color": "#F5F5F5" } }, "fontSize": 12 }],
+        "categoryAxis": [{ "labelColor": { "solid": { "color": "#BDBDBD" } }, "gridlineShow": false }],
+        "valueAxis": [{ "labelColor": { "solid": { "color": "#BDBDBD" } }, "gridlineColor": { "solid": { "color": "#2E2E2E" } } }],
+        "legend": [{ "labelColor": { "solid": { "color": "#BDBDBD" } } }],
+        "dropShadow": [{ "show": false }]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [{ "color": { "solid": { "color": "#FFFFFF" } } }],
+        "categoryLabels": [{ "color": { "solid": { "color": "#BDBDBD" } } }]
+      }
+    },
+    "slicer": {
+      "*": {
+        "items": [{ "fontColor": { "solid": { "color": "#F5F5F5" } }, "background": { "solid": { "color": "#1C1C1C" } } }],
+        "header": [{ "fontColor": { "solid": { "color": "#E53935" } } }]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "columnHeaders": [{ "fontColor": { "solid": { "color": "#FFFFFF" } }, "backColor": { "solid": { "color": "#B71C1C" } } }],
+        "values": [{ "fontColorPrimary": { "solid": { "color": "#F5F5F5" } }, "backColorPrimary": { "solid": { "color": "#1C1C1C" } }, "fontColorSecondary": { "solid": { "color": "#F5F5F5" } }, "backColorSecondary": { "solid": { "color": "#242424" } } }]
+      }
+    }
+  }
+}

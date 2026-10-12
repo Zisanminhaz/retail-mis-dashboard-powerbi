@@ -1,0 +1,13 @@
+StoreID,StoreName,City,Latitude,Longitude,StoreType,OpenDate
+S01,Gulshan,Dhaka,23.7925,90.4078,Flagship,2018-06-12
+S02,Dhanmondi,Dhaka,23.7465,90.376,Flagship,2021-11-14
+S03,Mirpur,Dhaka,23.8223,90.3654,Standard,2021-04-10
+S04,Uttara,Dhaka,23.8759,90.3795,Standard,2020-03-12
+S05,Agrabad,Chattogram,22.3254,91.8123,Flagship,2020-03-01
+S06,GEC Circle,Chattogram,22.359,91.8217,Standard,2022-04-17
+S07,Zindabazar,Sylhet,24.8949,91.8687,Standard,2018-06-06
+S08,Shaheb Bazar,Rajshahi,24.3636,88.6241,Standard,2021-06-27
+S09,Shibbari,Khulna,22.8136,89.5608,Standard,2019-01-03
+S10,Sadar Road,Barishal,22.701,90.3535,Express,2018-06-21
+S11,Jahaj Company Mor,Rangpur,25.7439,89.2752,Express,2020-08-19
+S12,Kandirpar,Cumilla,23.4607,91.1809,Express,2022-11-17

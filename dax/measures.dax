@@ -1,0 +1,89 @@
+// =====================================================================
+//  Retail MIS Dashboard — DAX measures
+//  All measures live in the dedicated _Measures table.
+//  Model: Fact_Sales (*) ──► (1) Dim_Date / Dim_Store / Dim_Product / Dim_Customer
+// =====================================================================
+
+
+// ---------------------------------------------------------------------
+// 0. Measure table (Modeling > New table)
+//    A one-row dummy table that holds every measure. The "Temp" column
+//    is hidden in report view so the table shows the measure icon.
+// ---------------------------------------------------------------------
+_Measures = ROW ( "Temp", BLANK () )
+
+
+// ---------------------------------------------------------------------
+// 1. Base measures
+// ---------------------------------------------------------------------
+Total Sales =
+SUM ( Fact_Sales[SalesAmount] )                         // Format: Currency (৳), 2 dp
+
+Total Cost =
+SUM ( Fact_Sales[CostAmount] )                          // Format: Currency (৳), 2 dp
+
+Gross Profit =
+[Total Sales] - [Total Cost]                            // Measure branching
+
+Gross Margin % =
+DIVIDE ( [Gross Profit], [Total Sales] )                // Format: Percentage, 1 dp
+
+Total Orders =
+DISTINCTCOUNT ( Fact_Sales[InvoiceID] )                 // One invoice = one basket
+
+Total Units =
+SUM ( Fact_Sales[Quantity] )
+
+
+// ---------------------------------------------------------------------
+// 2. Basket analysis
+// ---------------------------------------------------------------------
+Avg Basket Value =
+DIVIDE ( [Total Sales], [Total Orders] )                // Average spend per order
+
+Avg Basket Size =
+DIVIDE ( [Total Units], [Total Orders] )                // Average items per order
+
+
+// ---------------------------------------------------------------------
+// 3. Time intelligence (requires Dim_Date marked as a date table)
+// ---------------------------------------------------------------------
+Sales PY =
+CALCULATE ( [Total Sales], SAMEPERIODLASTYEAR ( Dim_Date[Date] ) )
+
+YoY Growth % =
+VAR CurrentSales  = [Total Sales]
+VAR PreviousSales = [Sales PY]
+RETURN
+    DIVIDE ( CurrentSales - PreviousSales, PreviousSales )   // BLANK for the first year
+
+
+// ---------------------------------------------------------------------
+// 4. Dynamic store ranking
+//    ALLSELECTED over the whole Dim_Store table (not just StoreName),
+//    so ranks stay global even when City is on the visual, while still
+//    respecting the user's slicer selections.
+// ---------------------------------------------------------------------
+Store Rank =
+IF (
+    HASONEVALUE ( Dim_Store[StoreName] ),
+    RANKX ( ALLSELECTED ( Dim_Store ), [Total Sales], , DESC, DENSE )
+)
+
+
+// ---------------------------------------------------------------------
+// 5. Top-N product analysis
+//    TopN is a numeric-range what-if parameter
+//    (Modeling > New parameter > Numeric range: 5 to 20, step 1, default 10).
+//    Power BI generates the table and its value measure automatically:
+//        TopN       = GENERATESERIES ( 5, 20, 1 )
+//        TopN Value = SELECTEDVALUE ( TopN[TopN], 10 )
+// ---------------------------------------------------------------------
+Product Rank =
+IF (
+    HASONEVALUE ( Dim_Product[ProductName] ),
+    RANKX ( ALLSELECTED ( Dim_Product ), [Total Sales], , DESC, DENSE )
+)
+
+Show Top N =
+IF ( [Product Rank] <= [TopN Value], 1, 0 )             // Visual-level filter: is 1
